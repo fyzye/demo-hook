@@ -2,9 +2,9 @@
 
 # chmod +x build.sh
 
-# git clone $1
+cd .. && git clone $1
 
-cd ./$2 && npm i
+cd $2 && npm i
 
 sed -i "" '7 a\ 
 "buildPath":"./docs/","publicPath":"./",

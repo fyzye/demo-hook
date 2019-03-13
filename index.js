@@ -1,4 +1,5 @@
 const express = require('express')
+const child_process = require('child_process')
 // const chalk = require('chalk')
 
 const app = express()
@@ -20,13 +21,21 @@ app.all('*', function (req, res, next) {
 app.post('/hook', function (req, res) {
   console.log(req.body)
 
-  // move(curYear,weekOfYear,req.body).then(_ => {
-  //   res.send('ok')
-  // })
-})
+  const {
+    repository:{full_name,name}
+  }=req.body
 
-app.get('/demo', function (req, res) {
-  res.send('ok')
+  const repoUrl = `https://github.com/${full_name}.git`
+
+  const subProcess = child_process.exec(`chmod +x ./build.sh && ./build.sh ${repoUrl} ${name}`, (err, stdout) => {
+    if (err) {
+      console.error(err)
+    } else {
+      subProcess.kill()
+    }
+
+    console.log('操作成功！您的更新已经成功部署到 git page!')
+  })
 })
 
 app.listen(1995)

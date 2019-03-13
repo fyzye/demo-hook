@@ -19,11 +19,7 @@ app.all('*', function (req, res, next) {
 
 //处理POST请求  
 app.post('/hook', function (req, res) {
-  console.log(req.body)
-
-  const {
-    repository:{full_name,name}
-  }=req.body
+  const {repository:{full_name,name}}=req.body
 
   const repoUrl = `https://github.com/${full_name}.git`
 

@@ -2,15 +2,17 @@
 
 # chmod +x build.sh
 
-git clone $1
+# git clone $1
 
-npm i
+cd ./$2 && npm i
 
 sed -i "" '7 a\ 
 "buildPath":"./docs/","publicPath":"./",
 ' bsy.json 
 
 sl build
+
+pwd 
 
 git add docs
 

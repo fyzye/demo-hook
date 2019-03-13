@@ -21,9 +21,9 @@ app.all('*', function (req, res, next) {
 app.post('/hook', function (req, res) {
   const {repository:{full_name,name}}=req.body
 
-  const repoUrl = `https://github.com/${full_name}.git`
+  const repoUrl = `git@github.com:${full_name}.git`
 
-  const subProcess = child_process.exec(`chmod +x ./build.sh && ./build.sh ${repoUrl} ${name}`, (err, stdout) => {
+  const subProcess = child_process.exec(`./build.sh ${repoUrl} ${name}`, (err, stdout) => {
     if (err) {
       console.error(err)
     } else {

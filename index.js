@@ -1,6 +1,6 @@
 const express = require('express')
 const child_process = require('child_process')
-// const chalk = require('chalk')
+const {sendEmail}=require('./email')
 
 const app = express()
 app.configure(function () {
@@ -19,7 +19,10 @@ app.all('*', function (req, res, next) {
 
 //处理POST请求  
 app.post('/hook', function (req, res) {
-  const {repository:{full_name,name}}=req.body
+  const {repository:{
+    full_name,name,
+    commits:{message,author:{email}}
+  }}=req.body
 
   const repoUrl = `git@github.com:${full_name}.git`
 
@@ -27,10 +30,10 @@ app.post('/hook', function (req, res) {
     if (err) {
       console.error(err)
     } else {
+      console.log(stdout)
+      sendEmail(email,message)
       subProcess.kill()
     }
-
-    console.log('操作成功！您的更新已经成功部署到 git page!')
   })
 })
 

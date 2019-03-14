@@ -16,7 +16,7 @@ sed -i '7 a\ "buildPath":"./docs/","publicPath":"./",' bsy.json
 
 sl build
 
-pwd 
+echo '\n\n打包完毕！\n\n'
 
 git add docs
 
@@ -24,5 +24,8 @@ git commit -m "build: 打包"
 
 git push -u origin master
 
+echo '\n\ngit推送完毕！\n\n'
+
 cd .. && rm -rf $2
 
+echo '\n\n操作成功！您的更新已经成功部署到 git page!'

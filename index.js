@@ -21,8 +21,9 @@ app.all('*', function (req, res, next) {
 app.post('/hook', function (req, res) {
   const {
     repository:{full_name,name},
-    commits:{message,author:{email}}
+    commits
   }=req.body
+  const {message,author:{email}}=commits[0]
 
   const repoUrl = `git@github.com:${full_name}.git`
 

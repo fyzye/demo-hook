@@ -21,9 +21,9 @@ app.all('*', function (req, res, next) {
 app.post('/hook', function (req, res) {
   const {
     repository:{full_name,name},
-    commits
+    // commits
   }=req.body
-  const {message,author:{email}}=commits[0]
+  // const {message,author:{email}}=commits[0]
 
   res.send('信息接收成功！')
 
@@ -34,7 +34,7 @@ app.post('/hook', function (req, res) {
       console.error(err)
     } else {
       console.log(stdout)
-      sendEmail(email,message)
+      // sendEmail(email,message)
       subProcess.kill()
     }
   })

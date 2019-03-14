@@ -25,6 +25,8 @@ app.post('/hook', function (req, res) {
   }=req.body
   const {message,author:{email}}=commits[0]
 
+  res.send('信息接收成功！')
+
   const repoUrl = `git@github.com:${full_name}.git`
 
   const subProcess = child_process.exec(`./build.sh ${repoUrl} ${name}`, (err, stdout) => {
